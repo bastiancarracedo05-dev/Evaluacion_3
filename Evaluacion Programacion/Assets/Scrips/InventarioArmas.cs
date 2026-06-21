@@ -13,14 +13,21 @@ public class InventarioArmas : MonoBehaviour
    
     void Awake()
     {
-        armas.Add(new Arma("Espada", 30));
+        //armas.Add(new Arma("Espada", 30));
 
-        EquiparArma("Espada");
+        //EquiparArma("Espada");
 
-        MostrarInventario();
+        //MostrarInventario();
+    }
+    public void AgregarArma(Arma arma)
+    {
+        armas.Add(arma);
+        Debug.Log("arma agregada: " + arma.nombre+ " | Daño: " + arma.dano);
+        OnArmaEquipada?.Invoke(arma);
     }
 
-    void EquiparArma(string nombre)
+
+    public void EquiparArma(string nombre)
     {
         Arma encontrada= armas.Find(a=> a.nombre==nombre);
 
@@ -31,13 +38,14 @@ public class InventarioArmas : MonoBehaviour
         }
     }
 
-    void MostrarInventario()
+   public void MostrarInventario()
     {
         foreach(Arma a in armas)
         {
             Debug.Log("En inventario: " + a.nombre + "daño: " + a.dano);
         }
     }
+
 
 
     void OnDisable()
